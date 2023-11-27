@@ -43,10 +43,53 @@
             margin-left: 8%;
         }
 
+        #breadcrumbs {
+            padding: 10px 0;
+            list-style: none;
+            width: 84%;
+            margin: auto;
+        }
+
+        #breadcrumbs a {
+            background-color: #f3f3f3;
+            text-decoration: none;
+            color: #0275d8;
+            padding: 10px;
+            margin: 2px;
+        }
+
+        #breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        #breadcrumbs span {
+            color: #666;
+        }
+
+        #breadcrumbs a.last {
+            font-weight: bold;
+        }
+
+        .breadcrumb-non-clickable {
+            color: #666 !important;
+            cursor: default !important;
+            text-decoration: none !important;
+        }
+
+        .breadcrumb-non-clickable:hover {
+            text-decoration: none;
+            color: #666; /* Keeps the color the same on hover */
+        }
+
     </style>
 </head>
 <body>
-    <h2 class="title">Dashboard | Student Feedback</h2>
+    <div id="breadcrumbs">
+        <a href="/feedback.html">Tier 1</a>
+        <a id="ratingCrumb" href="#" style="display: none;">Tier 2</a>
+        <a id="aspectCrumb" class="breadcrumb-non-clickable" style="display: none;">Tier 3</a>
+    </div>
+    <br>
     <div class="wrapper">
         <div id="generalStats">
             <p>Total Feedbacks: <span class="totalFeedbacks"></span></p>
@@ -73,19 +116,57 @@
 
         <!-- Emotions Overview -->
         <div id="emotionsOverview" class="hidden">
-            <h2>Emotions Overview</h2>
-            <div id="emotionsContent"></div>
+            <div id="emotionsContent">
+                <div class="data-container">
+                    <div class="table-container">
+                        <table id="emotionsTable" class="display">
+                            <thead>
+                                <tr>
+                                    <th>Participant ID</th>
+                                    <th>Emotion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Aspect Details -->
         <div id="aspectDetails" class="hidden">
-            <h2>Aspect Details</h2>
-            <div id="aspectsContent"></div>
+            <h2>Detailed Insights</h2>
+            <p><strong>Student ID:</strong> <span id="studentId"></span></p>
+            <p><strong>Rating:</strong> <span id="studentRating"></span>/5</p>
+            <p><strong>Sentiment:</strong> <span id="studentSentiment"></span></p>
+            <table id="aspectsTable" class="display">
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>State</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <p style="margin-top: 15px;"><strong>Report:</strong> <span id="detailedReport"></span></p>
+
+            <div id="aspectSentimentSummary" style="margin-top: 35px;">
+                <h2><i>Comparative Overview: Understanding Participant Sentiments Across the Board</i></h2>
+                <div class="chart-container" style="margin-left: 15%; margin-top: 10px;">
+                    <canvas id="aspectSentimentChart"></canvas>
+                </div>
+            </div>
+            
         </div>
+        
+
     </div>
 
     <script>
         let ratingsData, emotionsData, aspectsData;
+        let ratingSummary = [];
 
         function loadInitialData() {
             $.when(
@@ -100,18 +181,28 @@
         }
 
         function displayGeneralStats() {
-            var ratings = ratingsData["summary"];
-            populateRatingsTable(ratings);
-            createRatingsChart(ratings);
+            total = 0;
+            $.each(ratingsData, function(id, lvl) {
+                if (ratingSummary[lvl]) {
+                    ratingSummary[lvl]++;
+                } else {
+                    ratingSummary[lvl] = 1;
+                }
+                total++;
+            });
 
-            let total = Object.values(ratings).reduce((total, current) => total + current, 0);
-            $('.totalFeedbacks').text(total);
+            populateRatingsTable(ratingsData);
+            createRatingsChart(ratingsData);
+            createAspectSentimentSummary();
+
+            $('.totalFeedbacks').text(Object.keys(ratingsData).length);
         }
+        
 
         function createRatingsChart(ratings) {
             // Prepare data for the pie chart
-            let labels = Object.keys(ratings).map(key => `Rating ${key}`);
-            let dataPoints = Object.values(ratings);
+            let labels = Object.keys(ratingSummary);
+            let dataPoints = Object.values(ratingSummary);
 
             let config = {
                 type: 'pie',
@@ -146,17 +237,17 @@
         }
 
         function populateRatingsTable(ratings) {
-            let total = Object.values(ratings).reduce((total, current) => total + current, 0);
             let tableBody = $('#ratingsTable tbody');
             tableBody.empty();
-            $.each(ratings, function(rating, count) {
+            for (let lvl = 1; lvl <= 5; lvl++) {
+                let count = ratingSummary[lvl];
                 let percentage = ((count / total) * 100).toFixed(2);
                 tableBody.append(`<tr>
-                    <td><a href="#" onClick='alert(this);'>Rating ${rating}</a></td>
+                    <td><a href="#" onClick='displayEmotionsForRating(${lvl});'>Rating ${lvl}</a></td>
                     <td>${count}</td>
                     <td>${percentage}%</td>
                 </tr>`);
-            });
+            }
             $('#ratingsTable').DataTable({
                 "searching": false,
                 "paging": false,
@@ -171,19 +262,157 @@
             });
         }
 
-        function createRatingLinks() {
-            // The same as before
-        }
-
         function displayEmotionsForRating(rating) {
-            // The same as before
+            $('#ratingCrumb').text("Tier 2 (Rating " + rating + ")");
+            $('#ratingCrumb').show();
+            $('#generalStats').hide();
+            $('#emotionsOverview').show();
+            populateEmotionsTable(rating);
         }
 
-        function displayAspectDetails(studentId) {
-            // The same as before
+        function populateEmotionsTable(level) {
+            let tableBody = $('#emotionsTable tbody');
+            tableBody.empty();
+            $.each(ratingsData, function(id, lvl) {
+                if (level == lvl) {
+                    tableBody.append(`<tr>
+                        <td><a href="#" onClick='displayAspectDetails(${id});'>${id}</a></td>
+                        <td>${emotionsData[id]}</td>
+                    </tr>`);
+                }
+            });
+            $('#emotionsTable').DataTable({
+                "searching": false,
+                "paging": false,
+                "info": false
+            });
         }
+
+        function displayAspectDetails(pId) {
+            // Retrieve student data
+            let rating = ratingsData[pId];
+            let sentiment = emotionsData[pId];
+            let aspects = aspectsData.aspects;
+            let aspectStates = aspectsData.participants[pId];
+
+            // Update HTML elements with student data
+            $('#studentId').text(pId);
+            $('#studentRating').text(rating);
+            $('#studentSentiment').text(sentiment);
+
+            // Detailed aspect analysis
+            let negativeAspects = Object.keys(aspectStates).filter(aspect => aspectStates[aspect] === 'Negative');
+            let positiveAspects = Object.keys(aspectStates).filter(aspect => aspectStates[aspect] === 'Positive');
+            
+            // Prepare a detailed insight report
+            let detailedReport = `The participant ${pId} has rated the experience as ${rating}/5, expressing a sentiment of '${sentiment}'. `;
+            if (negativeAspects.length > 0) {
+                detailedReport += `The negative sentiment is likely influenced by the following aspects: ${negativeAspects.join(', ')}. `;
+                if (positiveAspects.length > 0) {
+                    detailedReport += `However, positive feedback was noted in aspects such as ${positiveAspects.join(', ')}. `;
+                }
+            } else {
+                detailedReport += 'No significant negative aspects were noted. ';
+                if (positiveAspects.length > 0) {
+                    detailedReport += `Positive aspects include ${positiveAspects.join(', ')}. `;
+                }
+            }
+
+             $('#detailedReport').text(detailedReport);
+
+            // Populate the aspect details table
+            populateAspectsTable(pId);
+            $('#ratingCrumb').hide();
+            $('#aspectCrumb').text("Tier 3 (Participant " + pId + ")");
+            $('#ratingCrumb').show();
+            $('#aspectCrumb').show();
+            $('#emotionsOverview').hide();
+            $('#aspectDetails').show();
+        }
+
+
+        function populateAspectsTable(pId) {
+            let tableBody = $('#aspectsTable tbody');
+            tableBody.empty();
+            let aspects = aspectsData.aspects;
+            let aspectStates = aspectsData.participants[pId];
+            aspects.forEach(function(aspect) {
+                let state = aspectStates[aspect];
+                tableBody.append(`<tr>
+                    <td>${aspect}</td>
+                    <td>${state}</td>
+                </tr>`);
+            });
+            $('#aspectsTable').DataTable({
+                "searching": false,
+                "paging": false,
+                "info": false
+            });
+        }
+
+        function createAspectSentimentSummary() {
+            let aspectSentimentCounts = {
+                'Positive': {},
+                'Neutral': {},
+                'Negative': {}
+            };
+
+            // Count the sentiments for each aspect
+            Object.values(aspectsData.participants).forEach(aspects => {
+                Object.entries(aspects).forEach(([aspect, sentiment]) => {
+                    if (!aspectSentimentCounts[sentiment][aspect]) {
+                        aspectSentimentCounts[sentiment][aspect] = 0;
+                    }
+                    aspectSentimentCounts[sentiment][aspect]++;
+                });
+            });
+
+            // Prepare data for the chart
+            let labels = aspectsData.aspects;
+            let datasets = Object.entries(aspectSentimentCounts).map(([sentiment, counts]) => {
+                return {
+                    label: sentiment,
+                    data: labels.map(label => counts[label] || 0),
+                    backgroundColor: sentiment === 'Positive' ? '#388E3C' : sentiment === 'Neutral' ? '#FBC02D' : '#D32F2F'
+                };
+            });
+
+            // Configuration for the bar chart
+            let config = {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: datasets
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            };
+
+            // Initialize the bar chart
+            let ctx = document.getElementById('aspectSentimentChart').getContext('2d');
+            new Chart(ctx, config);
+        }
+
 
         loadInitialData();
+
+        $(document).ready(function(){
+            $('#breadcrumbs a:last').addClass('last');
+
+            $('#ratingCrumb').click(function(e) {
+                e.preventDefault();
+                $('#ratingCrumb').show();
+                $('#generalStats').hide();
+                $('#emotionsOverview').show();
+                $('#aspectCrumb').hide();
+            });
+        });
+
     </script>
 </body>
 </html>

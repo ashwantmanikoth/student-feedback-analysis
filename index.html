@@ -311,7 +311,7 @@
                 let count = ratingSummary[lvl];
                 let percentage = ((count / total) * 100).toFixed(2);
                 tableBody.append(`<tr>
-                    <td><a href="#" onClick='displayEmotionsForRating(${lvl});'>Rating ${lvl}</a></td>
+                    <td><a onClick='displayEmotionsForRating(${lvl});'>Rating ${lvl}</a></td>
                     <td>${count}</td>
                     <td>${percentage}%</td>
                 </tr>`);

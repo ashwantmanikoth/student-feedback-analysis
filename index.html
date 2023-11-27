@@ -130,7 +130,7 @@
     <div id="breadcrumbs">
         <a id="overall">Overview</a>
         <a id="ratingCrumb">Tier 1</a>
-        <a id="sentimentCrumb" href="#" style="display: none;">Tier 2</a>
+        <a id="sentimentCrumb" style="display: none;">Tier 2</a>
         <a id="aspectCrumb" class="breadcrumb-non-clickable" style="display: none;">Tier 3</a>
     </div>
     <br>
@@ -351,7 +351,7 @@
             $.each(ratingsData, function(id, lvl) {
                 if (level == lvl) {
                     tableBody.append(`<tr>
-                        <td><a href="#" onClick='displayAspectPanel(${id});'>${id}</a></td>
+                        <td><a onClick='displayAspectPanel(${id});'>${id}</a></td>
                         <td>${emotionsData[id]}</td>
                     </tr>`);
                 }

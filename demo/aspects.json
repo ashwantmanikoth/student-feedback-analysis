@@ -1,0 +1,8 @@
+{
+    "aspects": ["Teaching Experience", "Lab Experience"],
+    "students": {
+        "1": {"Teaching Experience": "Positive", "Lab Experience": "Positive"},
+        "2": {"Teaching Experience": "Positive", "Lab Experience": "Neutral"},
+        "3": {"Teaching Experience": "Neutral", "Lab Experience": "Negative"}
+    }
+}

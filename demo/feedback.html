@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Feedback Analysis</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+    <style>
+        .wrapper { width: 80%; margin: auto; font-family: calibri; height: 100%; background-color: #f7f7f7; min-height: 550px; padding: 25px;}
+        .hidden { display: none; }
+        .chart-container { width: 600px; height: 400px; }
+        .link { cursor: pointer; color: blue; text-decoration: underline; }
+        #ratingsTable_wrapper { margin-top: 20px; }
+        .data-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+        .chart-container {
+            flex: 1; /* Assigns a flex-grow value */
+            padding: 10px;
+            max-width: 600px; /* Adjust the width as necessary */
+        }
+
+        .table-container {
+            flex: 2; /* Assigns a flex-grow value */
+            padding: 10px;
+            max-width: 600px; /* Adjust the width as necessary */
+        }
+
+        .totalFeedbacks {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .title {
+            color: gray;
+            margin-left: 8%;
+        }
+
+    </style>
+</head>
+<body>
+    <h2 class="title">Dashboard | Student Feedback</h2>
+    <div class="wrapper">
+        <div id="generalStats">
+            <p>Total Feedbacks: <span class="totalFeedbacks"></span></p>
+            <div class="data-container">
+                <div class="chart-container">
+                    <canvas id="ratingsChart"></canvas>
+                </div>
+                <div class="table-container">
+                    <table id="ratingsTable" class="display">
+                        <thead>
+                            <tr>
+                                <th>Rating</th>
+                                <th>Count</th>
+                                <th>Percentage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- Emotions Overview -->
+        <div id="emotionsOverview" class="hidden">
+            <h2>Emotions Overview</h2>
+            <div id="emotionsContent"></div>
+        </div>
+
+        <!-- Aspect Details -->
+        <div id="aspectDetails" class="hidden">
+            <h2>Aspect Details</h2>
+            <div id="aspectsContent"></div>
+        </div>
+    </div>
+
+    <script>
+        let ratingsData, emotionsData, aspectsData;
+
+        function loadInitialData() {
+            $.when(
+                $.getJSON('ratings.json', (data) => ratingsData = data),
+                $.getJSON('emotions.json', (data) => emotionsData = data),
+                $.getJSON('aspects.json', (data) => aspectsData = data)
+            ).then(() => {
+                displayGeneralStats();
+                createRatingsChart();
+                createRatingLinks();
+            });
+        }
+
+        function displayGeneralStats() {
+            var ratings = ratingsData["summary"];
+            populateRatingsTable(ratings);
+            createRatingsChart(ratings);
+
+            let total = Object.values(ratings).reduce((total, current) => total + current, 0);
+            $('.totalFeedbacks').text(total);
+        }
+
+        function createRatingsChart(ratings) {
+            // Prepare data for the pie chart
+            let labels = Object.keys(ratings).map(key => `Rating ${key}`);
+            let dataPoints = Object.values(ratings);
+
+            let config = {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: dataPoints,
+                        backgroundColor: [
+                            '#D32F2F', '#F57C00', '#FBC02D', '#388E3C', '#1976D2'
+                        ],
+                        borderColor: 'white',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Ratings Distribution'
+                        }
+                    }
+                },
+            };
+
+            // Initialize the pie chart
+            let ctx = document.getElementById('ratingsChart').getContext('2d');
+            new Chart(ctx, config);
+        }
+
+        function populateRatingsTable(ratings) {
+            let total = Object.values(ratings).reduce((total, current) => total + current, 0);
+            let tableBody = $('#ratingsTable tbody');
+            tableBody.empty();
+            $.each(ratings, function(rating, count) {
+                let percentage = ((count / total) * 100).toFixed(2);
+                tableBody.append(`<tr>
+                    <td><a href="#" onClick='alert(this);'>Rating ${rating}</a></td>
+                    <td>${count}</td>
+                    <td>${percentage}%</td>
+                </tr>`);
+            });
+            $('#ratingsTable').DataTable({
+                "searching": false,
+                "paging": false,
+                "info": false
+            });
+        }
+
+        function populateAspectsList() {
+            let aspectsList = $('#aspects-list');
+            $.each(aspectsData.aspects, function(index, aspect) {
+                aspectsList.append(`<li>${aspect}</li>`);
+            });
+        }
+
+        function createRatingLinks() {
+            // The same as before
+        }
+
+        function displayEmotionsForRating(rating) {
+            // The same as before
+        }
+
+        function displayAspectDetails(studentId) {
+            // The same as before
+        }
+
+        loadInitialData();
+    </script>
+</body>
+</html>

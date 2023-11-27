@@ -18,15 +18,15 @@
             margin-top: 20px;
         }
         .chart-container {
-            flex: 1; /* Assigns a flex-grow value */
+            flex: 1; 
             padding: 10px;
-            max-width: 600px; /* Adjust the width as necessary */
+            max-width: 600px;
         }
 
         .table-container {
-            flex: 2; /* Assigns a flex-grow value */
+            flex: 2;
             padding: 10px;
-            max-width: 600px; /* Adjust the width as necessary */
+            max-width: 600px;
         }
 
         .totalFeedbacks {
@@ -55,7 +55,8 @@
         }
 
         #breadcrumbs a:hover {
-            text-decoration: underline;
+            text-decoration: none;
+            cursor: pointer;
         }
 
         #breadcrumbs span {
@@ -74,7 +75,7 @@
 
         .breadcrumb-non-clickable:hover {
             text-decoration: none;
-            color: #666; /* Keeps the color the same on hover */
+            color: #666; 
         }
 
         #wordCloud {
@@ -92,22 +93,40 @@
         }
 
         .wordcloud-container {
-            flex: 1; /* Adjust this value to control the width of the word cloud */
-            margin-right: 20px; /* Spacing between word cloud and the info/graph */
+            flex: 1;
+            margin-right: 20px; 
         }
 
         .info-graph-container {
             color: gray;
             padding: 20px;
-            flex: 1; /* Adjust this value to control the width of the info and graph */
+            flex: 1; 
         }
 
         .generic-info {
-            margin-bottom: 20px; /* Spacing between info and graph */
+            margin-bottom: 20px; 
         }
+
+        .loader {
+            border: 13px solid #f3f3f3; 
+            border-top: 13px solid #3498db;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
     </style>
 </head>
 <body>
+    <div id="spinner" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <div class="loader"></div>
+    </div>    
     <div id="breadcrumbs">
         <a id="overall">Overview</a>
         <a id="ratingCrumb">Tier 1</a>
@@ -225,6 +244,7 @@
                 createWordCloud();
                 $(".aspectsIdentified").html(aspectsData.aspects.join(", "));
                 createAspectsBarChart('aspectScoresChart');
+                $('#spinner').hide();
             });
         }
 

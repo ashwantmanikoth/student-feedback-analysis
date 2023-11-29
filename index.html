@@ -131,6 +131,31 @@
             color: #1e1e1e;
             text-decoration: underline;
         }
+
+        #emotionsFilter {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            line-height: 20px;
+            color: #333;
+            background-color: #fff;
+            background-image: none;
+            width: 30%;
+        }
+
+        /* Style for the dropdown arrow */
+        #emotionsFilter::-ms-expand {
+            display: none;
+        }
+
+        /* Hover and focus states */
+        #emotionsFilter:hover, #emotionsFilter:focus {
+            border-color: #aaa;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+            outline: 0 none;
+        }
     </style>
 </head>
 <body>
@@ -186,6 +211,9 @@
             <div id="emotionsContent">
                 <div class="data-container">
                     <div class="table-container">
+                        <select id="emotionsFilter">
+                            <option value="">Select Sentiment</option>
+                        </select>                        
                         <table id="emotionsTable" class="display">
                             <thead>
                                 <tr>
@@ -355,30 +383,50 @@
         function populateEmotionsTable(level) {
             let tableBody = $('#emotionsTable tbody');
             let emotionsTable = $('#emotionsTable');
+            let emotionsFilter = $('#emotionsFilter');
 
+            // Clear and destroy the existing DataTable
             if ($.fn.DataTable.isDataTable(emotionsTable)) {
                 emotionsTable.DataTable().clear().destroy();
             }
 
             tableBody.empty();
+            emotionsFilter.empty().append('<option value="">Select Sentiment</option>'); // Reset the filter dropdown
+
+            let uniqueEmotions = new Set(); // To store unique sentiment values
 
             $.each(ratingsData, function(id, lvl) {
                 if (level == lvl) {
+                    let emotionValue = emotionsData[id];
+                    uniqueEmotions.add(emotionValue); // Add unique sentiment values
+
                     tableBody.append(`<tr>
                         <td><a onClick='displayAspectPanel(${id});'>${id}</a></td>
-                        <td>${emotionsData[id]}</td>
+                        <td>${emotionValue}</td>
                     </tr>`);
                 }
             });
 
+            // Populate the dropdown with unique sentiment values
+            uniqueEmotions.forEach(function(emotion) {
+                emotionsFilter.append(`<option value="${emotion}">${emotion}</option>`);
+            });
+
             // Reinitialize the DataTable
-            emotionsTable.DataTable({
-                "searching": false,
+            let dataTable = emotionsTable.DataTable({
+                "searching": true,
                 "paging": false,
                 "info": false,
-                "order": [[ 1, "asc" ]]
+                "order": [[ 1, "asc" ]],
+                "search": { "caseInsensitive": true }
+            });
+
+            // Implement filter logic
+            emotionsFilter.on('change', function() {
+                dataTable.column(1).search(this.value).draw();
             });
         }
+
 
         function createSentimentChart(rating) {
             let emotionFrequencies = [];

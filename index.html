@@ -8,7 +8,7 @@
     <style>
         .wrapper { width: 80%; margin: auto; font-family: calibri; height: 100%; background-color: #f7f7f7; min-height: 550px; padding: 25px;}
         .hidden { display: none; }
-        .chart-container { width: 600px; height: 400px; }
+        .chart-container { width: 600px; height: 400px; padding: 25px; }
         .link { cursor: pointer; color: blue; text-decoration: underline; }
         #ratingsTable_wrapper { margin-top: 20px; }
         .data-container {
@@ -197,6 +197,9 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="chart-container" style="margin-left: 5%;">
+                        <canvas id="sentimentChart"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -245,10 +248,10 @@
 
         function loadInitialData() {
             $.when(
-                $.getJSON('data/test-dataset.json', (data) => feedbackData = data),
-                $.getJSON('data/ratings.json', (data) => ratingsData = data),
-                $.getJSON('data/emotions.json', (data) => emotionsData = data),
-                $.getJSON('data/aspects.json', (data) => aspectsData = data)
+                $.getJSON('__datasets/model_out_data/_test_dataset_all_models.json', (data) => feedbackData = data),
+                $.getJSON('__datasets/model_out_data/ratings.json', (data) => ratingsData = data),
+                $.getJSON('__datasets/model_out_data/emotions.json', (data) => emotionsData = data),
+                $.getJSON('__datasets/model_out_data/aspects.json', (data) => aspectsData = data)
             ).then(() => {
                 displayRatingPanel();
                 createWordCloud();
@@ -346,6 +349,7 @@
             $('#ratingPanel').hide();
             $('#sentimentPanel').show();
             populateEmotionsTable(rating);
+            createSentimentChart(rating);
         }
 
         function populateEmotionsTable(level) {
@@ -374,6 +378,54 @@
                 "info": false,
                 "order": [[ 1, "asc" ]]
             });
+        }
+
+        function createSentimentChart(rating) {
+            let emotionFrequencies = [];
+            $.each(ratingsData, function(id, lvl) {
+                if (rating == lvl) {
+                    let emotion = emotionsData[id];
+                    if (emotionFrequencies[emotion]) {
+                        emotionFrequencies[emotion]++;
+                    } else {
+                        emotionFrequencies[emotion] = 1;
+                    }
+                }
+            });
+
+            let labels = Object.keys(emotionFrequencies);
+            let dataPoints = Object.values(emotionFrequencies);
+
+            let config = {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: dataPoints,
+                        backgroundColor: [
+                            '#D32F2F', '#F57C00', '#FBC02D', '#388E3C', '#1976D2'
+                        ],
+                        borderColor: 'white',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Ratings Distribution'
+                        }
+                    }
+                },
+            };
+
+            // Initialize the pie chart
+            let ctx = document.getElementById('sentimentChart').getContext('2d');
+            new Chart(ctx, config);
         }
 
         function displayAspectPanel(pId) {

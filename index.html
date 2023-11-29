@@ -248,7 +248,7 @@
 
         function loadInitialData() {
             $.when(
-                $.getJSON('datasets/model_out_data/_test_dataset_all_models.json', (data) => feedbackData = data),
+                $.getJSON('datasets/model_out_data/test_dataset_all_models.json', (data) => feedbackData = data),
                 $.getJSON('datasets/model_out_data/ratings.json', (data) => ratingsData = data),
                 $.getJSON('datasets/model_out_data/emotions.json', (data) => emotionsData = data),
                 $.getJSON('datasets/model_out_data/aspects.json', (data) => aspectsData = data)

@@ -306,7 +306,6 @@
 
             $('.totalFeedbacks').text(Object.keys(ratingsData).length);
         }
-        
 
         function createRatingsChart(ratings) {
             // Prepare data for the pie chart
@@ -428,6 +427,16 @@
         }
 
         let sentimentChart;
+        const labelColorMap = {
+            'pleased': '#4CAF50', 
+            'happy': '#8BC34A',
+            'sad': '#607D8B', 
+            'frustrated': '#F44336',
+        };
+
+        function getColorsForLabels(labels) {
+            return labels.map(label => labelColorMap[label] || '#9E9E9E');
+        }
 
         function createSentimentChart(rating) {
             if (sentimentChart) {
@@ -454,9 +463,7 @@
                     labels: labels,
                     datasets: [{
                         data: dataPoints,
-                        backgroundColor: [
-                            '#D32F2F', '#F57C00', '#FBC02D', '#388E3C', '#1976D2'
-                        ],
+                        backgroundColor:  getColorsForLabels(labels),
                         borderColor: 'white',
                         borderWidth: 1
                     }]

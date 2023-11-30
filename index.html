@@ -427,8 +427,12 @@
             });
         }
 
+        let sentimentChart;
 
         function createSentimentChart(rating) {
+            if (sentimentChart) {
+                sentimentChart.destroy();
+            }
             let emotionFrequencies = [];
             $.each(ratingsData, function(id, lvl) {
                 if (rating == lvl) {
@@ -473,7 +477,7 @@
 
             // Initialize the pie chart
             let ctx = document.getElementById('sentimentChart').getContext('2d');
-            new Chart(ctx, config);
+            sentimentChart = new Chart(ctx, config);
         }
 
         function displayAspectPanel(pId) {

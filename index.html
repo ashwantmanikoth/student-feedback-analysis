@@ -194,7 +194,6 @@
                         <thead>
                             <tr>
                                 <th>Rating</th>
-                                <th>Count</th>
                                 <th>Percentage</th>
                             </tr>
                         </thead>
@@ -352,7 +351,6 @@
                 let percentage = ((count / total) * 100).toFixed(2);
                 tableBody.append(`<tr>
                     <td><a onClick='displayEmotionsForRating(${lvl});'>Rating ${lvl}</a></td>
-                    <td>${count}</td>
                     <td>${percentage}%</td>
                 </tr>`);
             }
@@ -397,6 +395,9 @@
             $.each(ratingsData, function(id, lvl) {
                 if (level == lvl) {
                     let emotionValue = emotionsData[id];
+                    if (lvl >= 4 && ["frustrated", "sad"].includes(emotionValue)) {
+                        return;
+                    }
                     uniqueEmotions.add(emotionValue); // Add unique sentiment values
 
                     tableBody.append(`<tr>
@@ -416,7 +417,7 @@
                 "searching": true,
                 "paging": false,
                 "info": false,
-                "order": [[ 0, "asc" ]],
+                "order": [[ 1, "desc" ]],
                 "search": { "caseInsensitive": true }
             });
 
@@ -446,6 +447,9 @@
             $.each(ratingsData, function(id, lvl) {
                 if (rating == lvl) {
                     let emotion = emotionsData[id];
+                    if (lvl >= 4 && ["frustrated", "sad"].includes(emotion)) {
+                        return;
+                    }
                     if (emotionFrequencies[emotion]) {
                         emotionFrequencies[emotion]++;
                     } else {

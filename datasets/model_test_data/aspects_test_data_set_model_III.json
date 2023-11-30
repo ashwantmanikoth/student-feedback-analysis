@@ -1,0 +1,177 @@
+[
+    {
+        "text": "The lab sessions were well-structured and informative, and the professor's method was excellent.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Positive"},
+            {"aspect": "PROFESSOR", "sentiment": "Positive"}
+        ]
+    },
+    {
+        "text": "The lab lacked essential equipment, making experiments difficult, though the professor was quite good.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Negative"},
+            {"aspect": "PROFESSOR", "sentiment": "Positive"}
+        ]
+    },
+    {
+        "text": "The lab facilities were lacking, but the professor was engaging and insightful.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Negative"},
+            {"aspect": "PROFESSOR", "sentiment": "Positive"}
+        ]
+    },
+    {
+        "text": "The lab facilities were top-notch, but the professor was weird.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Positive"},
+            {"aspect": "PROFESSOR", "sentiment": "Negative"}
+        ]
+    },
+    {
+        "text": "The lab facilities were lacking, and the professor was good.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Negative"},
+            {"aspect": "PROFESSOR", "sentiment": "Positive"}
+        ]
+    },
+    {
+        "text": "The lab facilities were top-notch, and the professor was engaging and insightful.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Positive"},
+            {"aspect": "PROFESSOR", "sentiment": "Positive"}
+        ]
+    },
+    {
+        "text": "The lab facilities were lacking, and the professor was very nice.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Negative"},
+            {"aspect": "PROFESSOR", "sentiment": "Positive"}
+        ]
+    },
+    {
+        "text": "The lab facilities were top-notch, but the professor was nice.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Positive"},
+            {"aspect": "PROFESSOR", "sentiment": "Positive"}
+        ]
+    },
+    {
+        "text": "The lab facilities were lacking, but the professor was engaging and insightful.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Negative"},
+            {"aspect": "PROFESSOR", "sentiment": "Positive"}
+        ]
+    },
+    {
+        "text": "The lab facilities were top-notch, but the professor was bad.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Positive"},
+            {"aspect": "PROFESSOR", "sentiment": "Negative"}
+        ]
+    },
+    {
+        "text": "The lab facilities were lacking, but the professor was good.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Negative"},
+            {"aspect": "PROFESSOR", "sentiment": "Positive"}
+        ]
+    },
+    {
+        "text": "The lab facilities were top-notch, and the professor was engaging and insightful.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Positive"},
+            {"aspect": "PROFESSOR", "sentiment": "Positive"}
+        ]
+    },
+    {
+        "text": "The lab facilities were lacking, but the professor was superb.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Negative"},
+            {"aspect": "PROFESSOR", "sentiment": "Positive"}
+        ]
+    },
+    {
+        "text": "The lab facilities were top-notch.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Positive"},
+            {"aspect": "PROFESSOR", "sentiment": "Neutral"}
+        ]
+    },
+    {
+        "text": "The lab facilities were lacking, but the professor was engaging and insightful.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Negative"},
+            {"aspect": "PROFESSOR", "sentiment": "Positive"}
+        ]
+    },
+    {
+        "text": "The lab sessions were highly interactive, yet the professor's lectures were somewhat monotonous.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Positive"},
+            {"aspect": "PROFESSOR", "sentiment": "Negative"}
+        ]
+    },
+    {
+        "text": "The lab was fully equipped, but the professor's teaching method lacked clarity.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Positive"},
+            {"aspect": "PROFESSOR", "sentiment": "Negative"}
+        ]
+    },
+    {
+        "text": "The lab facilities were underwhelming, although the professor was truly inspiring.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Negative"},
+            {"aspect": "PROFESSOR", "sentiment": "Positive"}
+        ]
+    },
+    {
+        "text": "The lab was state-of-the-art, complemented by the professor's innovative teaching.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Positive"},
+            {"aspect": "PROFESSOR", "sentiment": "Positive"}
+        ]
+    },
+    {
+        "text": "The lab equipment was often malfunctioning, but effective teaching style.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Negative"},
+            {"aspect": "PROFESSOR", "sentiment": "Positive"}
+        ]
+    },
+    {
+        "text": "Despite the lab being well-maintained, the professor's indifferent attitude was a letdown.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Positive"},
+            {"aspect": "PROFESSOR", "sentiment": "Negative"}
+        ]
+    },
+    {
+        "text": "The lab was not only outdated but also poorly managed, unlike the professor's dynamic and engaging lectures.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Negative"},
+            {"aspect": "PROFESSOR", "sentiment": "Positive"}
+        ]
+    },
+    {
+        "text": "The professor's practical approach to teaching was very interesting.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Neutral"},
+            {"aspect": "PROFESSOR", "sentiment": "Positive"}
+        ]
+    },
+    {
+        "text": "The lab's environment was conducive to learning, but the professor's rigid style hindered engagement.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Positive"},
+            {"aspect": "PROFESSOR", "sentiment": "Negative"}
+        ]
+    },
+    {
+        "text": "While the lab was a hub of innovation, the professor's lectures lacked depth and were uninspiring.",
+        "aspects": [
+            {"aspect": "LAB", "sentiment": "Positive"},
+            {"aspect": "PROFESSOR", "sentiment": "Negative"}
+        ]
+    }
+]

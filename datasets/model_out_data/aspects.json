@@ -4,10 +4,6 @@
         "PROFESSOR"
     ],
     "participants": {
-        "5": {
-            "LAB": "Positive",
-            "PROFESSOR": "Positive"
-        },
         "1": {
             "LAB": "Neutral",
             "PROFESSOR": "Positive"
@@ -23,6 +19,10 @@
         "4": {
             "LAB": "Neutral",
             "PROFESSOR": "Negative"
+        },
+        "5": {
+            "LAB": "Positive",
+            "PROFESSOR": "Positive"
         },
         "6": {
             "LAB": "Neutral",
@@ -46,55 +46,55 @@
         },
         "11": {
             "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "12": {
-            "LAB": "Neutral",
             "PROFESSOR": "Neutral"
         },
-        "13": {
+        "12": {
             "LAB": "Negative",
             "PROFESSOR": "Negative"
         },
-        "14": {
+        "13": {
             "LAB": "Neutral",
             "PROFESSOR": "Positive"
+        },
+        "14": {
+            "LAB": "Negative",
+            "PROFESSOR": "Negative"
         },
         "15": {
             "LAB": "Neutral",
-            "PROFESSOR": "Positive"
+            "PROFESSOR": "Neutral"
         },
         "16": {
-            "LAB": "Negative",
+            "LAB": "Neutral",
             "PROFESSOR": "Negative"
         },
         "17": {
-            "LAB": "Negative",
-            "PROFESSOR": "Negative"
-        },
-        "18": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Neutral"
-        },
-        "19": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Negative"
-        },
-        "20": {
             "LAB": "Neutral",
             "PROFESSOR": "Positive"
         },
-        "21": {
+        "18": {
             "LAB": "Positive",
             "PROFESSOR": "Positive"
         },
+        "19": {
+            "LAB": "Negative",
+            "PROFESSOR": "Negative"
+        },
+        "20": {
+            "LAB": "Positive",
+            "PROFESSOR": "Neutral"
+        },
+        "21": {
+            "LAB": "Negative",
+            "PROFESSOR": "Neutral"
+        },
         "22": {
-            "LAB": "Neutral",
+            "LAB": "Positive",
             "PROFESSOR": "Positive"
         },
         "23": {
-            "LAB": "Negative",
-            "PROFESSOR": "Negative"
+            "LAB": "Neutral",
+            "PROFESSOR": "Positive"
         },
         "24": {
             "LAB": "Negative",
@@ -102,10 +102,10 @@
         },
         "25": {
             "LAB": "Neutral",
-            "PROFESSOR": "Positive"
+            "PROFESSOR": "Negative"
         },
         "26": {
-            "LAB": "Positive",
+            "LAB": "Neutral",
             "PROFESSOR": "Positive"
         },
         "27": {
@@ -113,295 +113,51 @@
             "PROFESSOR": "Positive"
         },
         "28": {
-            "LAB": "Positive",
-            "PROFESSOR": "Neutral"
+            "LAB": "Neutral",
+            "PROFESSOR": "Negative"
         },
         "29": {
-            "LAB": "Negative",
-            "PROFESSOR": "Neutral"
+            "LAB": "Neutral",
+            "PROFESSOR": "Positive"
         },
         "30": {
-            "LAB": "Positive",
+            "LAB": "Neutral",
             "PROFESSOR": "Positive"
         },
         "31": {
-            "LAB": "Positive",
-            "PROFESSOR": "Positive"
-        },
-        "32": {
             "LAB": "Negative",
             "PROFESSOR": "Negative"
         },
+        "32": {
+            "LAB": "Positive",
+            "PROFESSOR": "Positive"
+        },
         "33": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Neutral"
+            "LAB": "Positive",
+            "PROFESSOR": "Positive"
         },
         "34": {
             "LAB": "Neutral",
             "PROFESSOR": "Positive"
         },
         "35": {
-            "LAB": "Neutral",
+            "LAB": "Positive",
             "PROFESSOR": "Positive"
         },
         "36": {
-            "LAB": "Negative",
+            "LAB": "Neutral",
             "PROFESSOR": "Negative"
         },
         "37": {
-            "LAB": "Negative",
+            "LAB": "Neutral",
             "PROFESSOR": "Negative"
         },
         "38": {
             "LAB": "Neutral",
-            "PROFESSOR": "Negative"
+            "PROFESSOR": "Positive"
         },
         "39": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "40": {
-            "LAB": "Negative",
-            "PROFESSOR": "Negative"
-        },
-        "41": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "42": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "43": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "44": {
-            "LAB": "Negative",
-            "PROFESSOR": "Negative"
-        },
-        "45": {
-            "LAB": "Negative",
-            "PROFESSOR": "Negative"
-        },
-        "46": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "47": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Negative"
-        },
-        "48": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Negative"
-        },
-        "49": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "50": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "51": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "52": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "53": {
-            "LAB": "Negative",
-            "PROFESSOR": "Negative"
-        },
-        "54": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Negative"
-        },
-        "55": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Negative"
-        },
-        "56": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Negative"
-        },
-        "57": {
-            "LAB": "Negative",
-            "PROFESSOR": "Negative"
-        },
-        "58": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "59": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "60": {
-            "LAB": "Negative",
-            "PROFESSOR": "Negative"
-        },
-        "61": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Neutral"
-        },
-        "62": {
             "LAB": "Positive",
-            "PROFESSOR": "Positive"
-        },
-        "63": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "64": {
-            "LAB": "Negative",
-            "PROFESSOR": "Negative"
-        },
-        "65": {
-            "LAB": "Positive",
-            "PROFESSOR": "Positive"
-        },
-        "66": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "67": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "68": {
-            "LAB": "Positive",
-            "PROFESSOR": "Positive"
-        },
-        "69": {
-            "LAB": "Negative",
-            "PROFESSOR": "Negative"
-        },
-        "70": {
-            "LAB": "Positive",
-            "PROFESSOR": "Positive"
-        },
-        "71": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "72": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "73": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Neutral"
-        },
-        "74": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "75": {
-            "LAB": "Positive",
-            "PROFESSOR": "Positive"
-        },
-        "76": {
-            "LAB": "Negative",
-            "PROFESSOR": "Negative"
-        },
-        "77": {
-            "LAB": "Positive",
-            "PROFESSOR": "Positive"
-        },
-        "78": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Neutral"
-        },
-        "79": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "80": {
-            "LAB": "Positive",
-            "PROFESSOR": "Positive"
-        },
-        "81": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Negative"
-        },
-        "82": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Negative"
-        },
-        "83": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Negative"
-        },
-        "84": {
-            "LAB": "Positive",
-            "PROFESSOR": "Positive"
-        },
-        "85": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "86": {
-            "LAB": "Negative",
-            "PROFESSOR": "Negative"
-        },
-        "87": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "88": {
-            "LAB": "Negative",
-            "PROFESSOR": "Negative"
-        },
-        "89": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "90": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "91": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "92": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "93": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "94": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Positive"
-        },
-        "95": {
-            "LAB": "Positive",
-            "PROFESSOR": "Positive"
-        },
-        "96": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Negative"
-        },
-        "97": {
-            "LAB": "Negative",
-            "PROFESSOR": "Negative"
-        },
-        "98": {
-            "LAB": "Neutral",
-            "PROFESSOR": "Negative"
-        },
-        "99": {
-            "LAB": "Positive",
-            "PROFESSOR": "Positive"
-        },
-        "100": {
-            "LAB": "Neutral",
             "PROFESSOR": "Positive"
         }
     }
